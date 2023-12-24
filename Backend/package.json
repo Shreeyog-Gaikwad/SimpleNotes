@@ -1,0 +1,19 @@
+{
+  "name": "simplenote-backend",
+  "version": "1.0.0",
+  "description": "SimpleNote - Your Notebook on the Cloud.",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
