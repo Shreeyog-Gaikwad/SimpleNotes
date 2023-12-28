@@ -79,7 +79,7 @@ router.put('/updatenote/:id', fetchuser ,async (req,res) => {
 });
 
 
-// ROUTE 3 : Deleting notes created by User by DELETE "/api/notes/deletenote/:id". No login required
+// ROUTE 4 : Deleting notes created by User by DELETE "/api/notes/deletenote/:id". No login required
 router.delete('/deletenote/:id', fetchuser ,async (req,res) => {
     try {
         let note = await Notes.findById(req.params.id);
