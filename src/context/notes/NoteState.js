@@ -13,11 +13,10 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4OTQ1OWMzZDU4MThiODVlODYyZGI1In0sImlhdCI6MTcwMzc0NDYxNn0.dJfs6BWBE3o904D9Zbfr0K9Iy9IHBeJG42DeoVuVRps"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const json = await response.json();
-    console.log(json);
     setnotes(json);
   }
 
@@ -27,22 +26,11 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4OTQ1OWMzZDU4MThiODVlODYyZGI1In0sImlhdCI6MTcwMzc0NDYxNn0.dJfs6BWBE3o904D9Zbfr0K9Iy9IHBeJG42DeoVuVRps"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const json = await response.json();
-    console.log(json);
-
-    const note = {
-      "_id": "",//"6589c8fgha34264a09lob779f665f",
-      "user": "",//"6589459c3d5818b85e862db5",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "",//"2023-12-25T18:23:31.807Z",
-      "__v": 0
-    }
+    const note = await response.json();
     setnotes(notes.concat(note));
   }
 
@@ -52,11 +40,10 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4OTQ1OWMzZDU4MThiODVlODYyZGI1In0sImlhdCI6MTcwMzc0NDYxNn0.dJfs6BWBE3o904D9Zbfr0K9Iy9IHBeJG42DeoVuVRps"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const json = await response.json();
-    console.log(json);
 
     const newNotes = notes.filter((note) => { return note._id !== id });
     setnotes(newNotes);
@@ -68,26 +55,27 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4OTQ1OWMzZDU4MThiODVlODYyZGI1In0sImlhdCI6MTcwMzc0NDYxNn0.dJfs6BWBE3o904D9Zbfr0K9Iy9IHBeJG42DeoVuVRps"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });
     const json = response.json();
-    console.log(json);
 
-    let newNotes = JSON.parse(JSON.stringify(notes));
+    getnote();
 
-    for (let index = 0; index < newNotes.length; index++) {
-      const element = newNotes[index];
-      if (element._id === id) {
-        newNotes.title = title;
-        newNotes.description = description;
-        newNotes.tag = tag;
-        break;
-      }
-    }
-    console.log(id,newNotes);
-    setnotes(newNotes);
+    //let newNotes = JSON.parse(JSON.stringify(notes));
+
+    //for (let index = 0; index < notes.length; index++) {
+    //  const element = notes[index];
+    //  if (element._id === id) {
+    //    notes.title = title;
+    //    notes.description = description;
+    //    notes.tag = tag;
+    //    break;
+    //  }
+    //}
+    //console.log(id,notes);
+    //setnotes(notes);
   }
 
   return (
